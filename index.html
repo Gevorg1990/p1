@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>progress</title>
+</head>
+
+<style>
+	* {
+		padding: 0;
+		margin: 0;
+		box-sizing: border-box;
+	}
+
+	body {
+		perspective: 500px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: 100vh;
+		background: rgba(0,0,0,.7)
+	}
+
+	.progress-block {
+		text-align: center;
+		position: relative;
+	}
+
+	#rangeValue {
+
+    font-size: 18px;
+    transition: all 0.3s ease;
+    color:  white;	
+  /*  position: absolute;
+    left: -11px;*/
+
+}
+
+	#range {
+		cursor:pointer;
+		position:relative;
+
+		width: 400px;
+		height: 20px;
+		-webkit-appearance:none;
+		background-color: #111;
+		outline: none;
+		border-radius: 15px;
+		padding: 0;
+		overflow: hidden;
+		box-shadow:0 0 10px rgba(0,0,0,.1)
+		
+	}
+
+	#range::-webkit-slider-thumb {
+	
+		-webkit-appearance:none;
+		width: 20px;
+		height: 20px;
+	
+		box-sizing: border-box;
+		background: #00fd0a;
+		border:6px solid #333;
+		border-radius: 50%;
+		box-shadow: -407px 0px 20px 390px #00fd0a;
+
+		
+	}
+
+	.d42 {
+
+		width: 60px; 
+		height: 60px;
+		transition: visibility 0.3s ease;
+		visibility: hidden;
+		display: flex;
+	    top: -6px;
+	    transition: all 0.1s ease;
+        transform: translateX(-18px);
+		justify-content: center;
+		align-items: center;
+		position: relative; 
+	
+		  
+	}
+	.anim{
+		animation: n 1.5s ease;
+	}
+
+.d42:after {
+    content: "";
+    border: 2px solid #00fd0a;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+
+    /* left: calc(50% - 50px); */
+    /* top: calc(50% - 50px); */
+    transform: rotate(
+-134deg
+);
+    border-radius: 0 50% 50% 50%;
+    box-shadow: 0 0 3px 1px rgb(0 0 0 / 30%);
+    transition: all 0.3s ease;
+  
+/*transform:rotate3d(0,0.1,0,50deg);transform:rotate(20deg);*/
+}
+@keyframes n {
+	0%{}
+	50%{transform:rotate3d(0,0,1,-30deg);transform:rotate(20deg);}
+	
+	100%{transform:translateX(-35px) rotate(-20deg)}
+}
+  
+
+	.clav {
+		visibility: visible !important;
+	}
+
+	
+
+</style>
+<body>
+
+
+	<div class="progress-block">
+		<div class="d42">
+				<span id="rangeValue">0</span>
+		</div>
+		
+	<input id="range" type="range" value="0" min="0" max="1000">
+	</div>
+
+
+	<script>
+
+	
+
+   var v,val;
+
+  
+	     document.getElementById('range').onchange=function(){
+	     	
+			    v = document.getElementById('range').value
+				val =document.getElementById('rangeValue').innerHTML=v;
+		
+			document.querySelector('.d42').style.left= val / 10 + '%'
+
+			}
+
+			document.getElementById('range').onmousemove=function(e){
+				document.querySelector('.d42').classList.add('clav')
+				var v = document.getElementById('range').value;
+				var val =document.getElementById('rangeValue').innerHTML=v;
+				
+				     document.querySelector('.d42').style.left= val / 10 + '%';
+				   
+
+				    if(v ==1000) {
+				    	document.querySelector('.d42').style.transform=`scale(${2}) translateX(${-20}px)translateY(${-15}px)`
+				    }else {
+				    	document.querySelector('.d42').style.transform=`scale(${1}) translateX(${-20}px)`
+				    }
+				    console.log(v)
+				   
+             
+			}
+
+	
+
+            		document.getElementById('range').onmouseleave=function(){
+					document.querySelector('.d42').classList.remove('clav')
+				
+
+            }
+     
+      
+
+	</script>
+</body>
+</html>
+
+
+
+			
+
+<!-- .my-list {
+  li {
+    animation: my-animation 300ms ease-out;
+      
+    @for $i from 1 through 50 {
+      &:nth-child(#{$i}) {
+        animation-delay: 100ms * $i;
+      }
+    }
+  }
+} -->
